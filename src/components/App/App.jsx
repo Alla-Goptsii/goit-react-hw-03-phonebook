@@ -6,11 +6,11 @@ import { Container } from './App.styled';
 import { ContactList } from '../ContactList/ContactList';
 
 import { Filter } from '../Filter/Filter';
-// import contacts from './contacts.json';
+import contacts from './contacts.json';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts,
     filter: '',
   };
 
@@ -50,20 +50,16 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    console.log('App component did mount');
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
 
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
-      console.log('parsed');
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('App component did update');
     if (this.state.contacts !== prevState.contacts) {
-      console.log('obnovilos posle add');
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
